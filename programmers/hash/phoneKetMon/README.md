@@ -1,4 +1,5 @@
 # 문제 풀이
+![폰켓몬풀이](https://github.com/bluedog129/js_algorithm/assets/50707297/13da5ed4-94d5-4557-8b25-0fd1f796dbb9)
 
 
 # 시간 복잡도
