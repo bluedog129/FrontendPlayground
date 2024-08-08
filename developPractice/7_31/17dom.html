@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .img1 {
+        width: 100px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="link1" href="https://www.naver.com" target="_blank"></a>
+    <img
+      class="img1"
+      src="./arsenal-club-logo.jpg"
+      alt="arsanl"
+      width="100px"
+    />
+
+    <script>
+      const img1 = document.querySelector(".img1");
+      const link1 = document.querySelector(".link1");
+
+      console.log(link1.getAttribute);
+      console.log(link1.getAttribute("href"));
+      console.log(link1.getAttribute("target"));
+      console.log(link1.attributes);
+      console.log(link1.attributes[0]);
+      console.log(link1.hasAttribute("id"));
+
+      console.log(getComputedStyle(link1));
+      console.log(getComputedStyle(link1).color);
+      console.log(getComputedStyle(link1).fontSize);
+      console.log(getComputedStyle(link1).fontWeight);
+      console.log(getComputedStyle(link1).fontFamily);
+
+      setTimeout(() => {
+        img1.setAttribute("src", "./arsenal-red.png");
+        img1.setAttribute("alt", "arsenal-red");
+
+        img1.style.cssText = `
+          width: 200px;
+          height: 200px;
+          border: 1px solid red;
+        `;
+      }, 4000);
+    </script>
+  </body>
+</html>

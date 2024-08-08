@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <input type="range" name="myRange" id="myRange" min="10" max="100" />
+      <input type="color" name="myColor" id="myColor" value="#eaeaea" />
+    </main>
+    <script>
+      const $myRange = document.querySelector("#myRange");
+      $myRange.addEventListener("input", (e) => {
+        console.log(e.target.value);
+      });
+
+      const $myColor = document.querySelector("#myColor");
+      $myColor.addEventListener("change", (e) => {
+        console.log(e.target.value);
+      });
+    </script>
+  </body>
+</html>

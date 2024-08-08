@@ -1,0 +1,56 @@
+.list {
+  width: 1200px;
+  margin: 30px auto;
+  position: relative;
+  display: flex;
+}
+
+.list ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.list li {
+  position: relative;
+}
+
+.list > ul > li > a {
+  display: block;
+  padding: 1rem 2rem;
+  color: blue;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.list > ul > li > a:hover {
+  background-color: gray;
+}
+
+.list ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: gray;
+  width: 200px;
+}
+
+.list ul ul li {
+  border-top: 1px solid gray;
+}
+
+.list ul ul li a {
+  padding: 1rem;
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.list ul ul li a:hover {
+  background-color: #555;
+}
+
+.list li:hover > ul {
+  display: block;
+}

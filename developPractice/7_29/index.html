@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+    1. api 정보를 가져온다.
+    2. 브라우저에 출력한다.
+     -->
+    <div class="app">
+      <section class="w_dataCon">
+        <ul></ul>
+      </section>
+    </div>
+    <script>
+      // api 가져오기
+      const fetchData = async (url) => {
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      };
+
+      const loadItems = async () => {
+        const dataUrl =
+          "https://www.7timer.info/bin/api.pl?lon=127.378&lat=36.349&product=civillight&output=json";
+        try {
+          const data = await fetchData(dataUrl);
+          return data.dataseries;
+        } catch (error) {
+          console.error("데이터를 가져오는데 실패했습니다.", error);
+          return [];
+        }
+      };
+
+      const displayItems = (items) => {
+        const tempUit = "°C";
+        const container = document.querySelector(".w_dataCon > ul");
+        items.forEach((item) => {
+          const dateStr = new Date(item.date);
+          const li = document.createElement("li");
+          li.innerHTML = `
+          <p>날짜: ${dateStr}</p>
+          <p>온도 : ${item.temp2m.max}${tempUit} / ${item.temp2m.min}${tempUit}</p>
+          <p>날씨: <img src="${item.weather}.jpg" width="30px"</p>
+          `;
+          container.appendChild(li);
+        });
+      };
+
+      const init = async () => {
+        const items = await loadItems();
+        console.log(items);
+        displayItems(items);
+      };
+
+      init();
+    </script>
+  </body>
+</html>

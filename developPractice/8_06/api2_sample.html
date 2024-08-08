@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>환율계산기</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>환율계산기</h1>
+      <div class="con">
+        <div class="currency">
+          <p></p>
+          <select name="currency-one" id="currency-one"></select>
+          <input type="number" id="amount-one" value="1" />
+        </div>
+      </div>
+      <div class="currency">
+        <p></p>
+        <select name="currency-two" id="currency-two"></select>
+        <input type="number" id="amount-two" value="1" />
+      </div>
+      <button id="swap">바꾸기</button>
+      <p id="rate"></p>
+    </div>
+    <script src="./api2_sample.js"></script>
+  </body>
+</html>

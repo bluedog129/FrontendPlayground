@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+.sec {
+  width: 80%;
+  margin: auto;
+  border: 1px solid red;
+  position: relative;
+}
+.btnsCon {
+  display: flex;
+  gap: 1rem;
+}
+.btnsCon button {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding-top: 26px;
+}
+.btnsCon > li.on button,
+.btnsCon > li:hover button {
+  background-color: rgba(10, 255, 255, 0.1);
+}
+.btnsCon > li:hover button {
+  background-color: rgba(20, 255, 200, 0.5);
+}
+
+.listCon > li {
+  display: none;
+  height: 200px;
+  border: 1px solid lightgray;
+  padding: 1rem;
+}
+.listCon > li.on {
+  display: block;
+}
+.sec .bar {
+  width: 100px;
+  height: 10px;
+  background-color: lightcoral;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: 0.3s;
+}

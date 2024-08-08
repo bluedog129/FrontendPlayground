@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=YourFontFamily:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="myreset.css" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+      <header class="header">
+        <nav>
+          <h1><a href="#">logoipsum</a></h1>
+          <div class="gnbWrap">
+            <ul class="gnb">
+              <li>
+                <a href="#">About us</a>
+                <ul class="sub">
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">Services</a>
+                <ul class="sub">
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">Case Studies</a>
+                <ul class="sub">
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">Blog</a>
+                <ul class="sub">
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">How it Works</a>
+                <ul class="sub">
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">Hire</a>
+                <ul class="sub">
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                    <li><a href="#">details</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <button class="hdButton">Contact us</button>
+        </nav>
+      </header>
+      <main>
+        <section class="section1">
+            <div class="contents">
+              <h2>
+                <span class="text-black">Great</span> <span class="text-purple">software</span> <span class="text-black">is</span> <br>
+                <span class="text-black-bold">built by great</span> <span class="text-purple-bold">teams</span>
+              </h2>
+              <p>
+                  We help build and manage a team of world-class developers<br><br>
+                  to bring your vision to life.
+              </p>
+              <button class="cta-button">Let's get started!</button>
+            </div>
+            <div class="videoContents">
+              <img src="./img/web_development.png" alt="">
+            </div>
+        </section>
+        <section class="section2">
+          <h2>
+            Services we offer
+          </h2>
+          <div class="swiper">
+            <div class="swiper-wrapper"></div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+          </div>
+        </section>
+      </main>
+      <!-- Swiper JS -->
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <!-- Initialize Swiper -->
+      <script>
+        const swiper = new Swiper('.swiper', {
+          slidesPerView: 5,
+          centeredSlides: true,
+          spaceBetween: 30,
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+            renderFraction: function (currentClass, totalClass) {
+              return '<span class="' + currentClass + '"></span>' +
+                    ' / ' +
+                    '<span class="' + totalClass + '"></span>';
+            },
+          },
+          virtual: {
+            slides: (function () {
+              const slides = [];
+              for (var i = 0; i < 20; i += 1) {
+                slides.push(`
+                  <div class="slide-content">
+                    <img src="./img/service${i % 3 + 1}.png" alt="Description of image ${i % 3 + 1}">
+                    <h3>Web Design & Development</h3>
+                    <p>A Website is an extension of yourself and we can help you to express it properly.<br> Your website is your number one marketing asset because we live in a digital age.</p>
+                  </div>
+                `);
+              }
+              return slides;
+            })(),
+          },
+        });
+      </script>
+  </body>
+</html>

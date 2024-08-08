@@ -1,0 +1,74 @@
+section {
+  border: 1px solid red;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  gap: 1rem;
+}
+
+section img {
+  width: 50%;
+}
+
+.card {
+  border: 1px solid black;
+  flex: 1;
+  position: relative;
+  padding-top: 40%;
+  perspective: 900px;
+}
+
+.card > p {
+  border: 1px solid red;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  border: 1px solid black;
+  backface-visibility: hidden;
+  transition: 0.5s;
+}
+.front {
+  z-index: 10;
+  background-image: url("./img/line.png");
+  background-color: antiquewhite;
+  filter: grayscale(1);
+}
+
+.back {
+  background-color: whitesmoke;
+  transform: rotateY(180deg);
+}
+
+.box {
+  margin: 50px auto;
+  background-color: antiquewhite;
+  width: 50%;
+}
+
+.box .item {
+  border: 1px solid red;
+  width: 50%;
+  height: 20vw;
+  padding-top: 50%;
+  margin: auto;
+  position: relative;
+}
+
+.item p {
+  position: absolute;
+  top: 0;
+}
+
+.card:hover .front {
+  filter: grayscale(0);
+  transform: rotateY(-180deg);
+}
+
+.card:hover .back {
+  transform: rotateY(0deg);
+}

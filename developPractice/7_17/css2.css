@@ -1,0 +1,66 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+/* .listCon li:nth-of-type(1) {
+  border: 5px solid rgb(0, 255, 72) !important;
+}
+
+.listCon li:nth-of-type(3) {
+  border: 5px solid tomato;
+}
+
+li {
+  background-color: aliceblue;
+}
+
+.listCon li:nth-of-type(3) ~ li {
+  border: 10px dotted lightblue;
+}
+
+.listCon > li {
+} */
+
+:root {
+  --mcolor1: tomato;
+}
+
+.listCon {
+  font-size: 1rem;
+}
+
+.listCon > li {
+  border: 1px solid red;
+}
+
+/* .listCon > li:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+} */
+
+.listCon a:hover {
+  border: 1px solid rgb(235, 2, 2);
+  background-color: blueviolet;
+}
+
+.listCon a:active {
+  background-color: rebeccapurple;
+}
+
+.listCon a:focus {
+  border-width: 3px;
+}
+
+.listCon > li:nth-of-type(6) {
+  background-color: aqua;
+}
+
+.listCon > li:nth-of-type(6)::before {
+  content: "여기!";
+  display: block;
+  border: 1px solid brown;
+}
+
+.listCon > li:nth-of-type(6)::after {
+  content: "여기!";
+  display: block;
+  border: 1px solid brown;
+}

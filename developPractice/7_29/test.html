@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="con">
+      <p>p요소</p>
+    </div>
+    <script>
+      const $con = document.querySelector(".con");
+      $con.addEventListener("click", (e) => {
+        console.log(e);
+        console.log("화살표 함수", this);
+        console.log(this);
+      });
+      $con.addEventListener("click", function (e) {
+        console.log(e);
+        console.log("일반 함수", this);
+        console.log(this);
+      });
+    </script>
+  </body>
+</html>

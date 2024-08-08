@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="./33slide.css" />
+  </head>
+  <body>
+    <main>
+      <h1>슬라이드 연습</h1>
+      <section class="slide">
+        <h2>슬라이드 섹션영역</h2>
+        <div class="slide-wrap">
+          <ul class="sliderUl">
+            <!-- 슬라이드 시작 -->
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호1</p>
+                <img src="./img/1.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호2</p>
+                <img src="./img/2.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호3</p>
+                <img src="./img/3.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호4</p>
+                <img src="./img/4.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호5</p>
+                <img src="./img/5.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호6</p>
+                <img src="./img/6.jpg" alt="" />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button class="btn prev">이전</button>
+        <button class="btn next">다음</button>
+        <div class="slider-dot">
+          <span class="dot1">1</span>
+          <span class="dot2">2</span>
+          <span class="dot3">3</span>
+          <span class="dot4">4</span>
+          <span class="dot5">5</span>
+          <span class="dot6">6</span>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const sliderUl = document.querySelector('.sliderUl');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            const dots = document.querySelectorAll('.slider-dot span');
+            
+            // 슬라이드 복제 및 추가
+            const slides = sliderUl.querySelectorAll('li');
+            const firstSlide = slides[0].cloneNode(true);
+            const lastSlide = slides[slides.length - 1].cloneNode(true);
+            sliderUl.insertBefore(lastSlide, slides[0]);
+            sliderUl.appendChild(firstSlide);
+
+            let currentSlide = 1;
+            const totalSlides = slides.length + 2;
+            const visibleSlides = 3;
+
+            // 슬라이더 너비 재설정
+            sliderUl.style.width = `${(totalSlides / visibleSlides) * 100}%`;
+            sliderUl.querySelectorAll('li').forEach(slide => {
+              slide.style.width = `${100 / totalSlides}%`;
+            });
+
+            function updateSlider() {
+              sliderUl.style.transition = 'transform 0.3s ease';
+              sliderUl.style.transform = `translateX(-${(currentSlide * 100) / totalSlides}%)`;
+              updateDots();
+            }
+
+            function updateDots() {
+              dots.forEach((dot, index) => {
+                if (index === (currentSlide - 1 + totalSlides - 2) % (totalSlides - 2)) {
+                  dot.style.backgroundColor = 'black';
+                  dot.style.color = 'white';
+                } else {
+                  dot.style.backgroundColor = 'tomato';
+                  dot.style.color = 'black';
+                }
+              });
+            }
+
+            function nextSlide() {
+              currentSlide++;
+              if (currentSlide === totalSlides - 1) {
+                setTimeout(() => {
+                  sliderUl.style.transition = 'none';
+                  updateSlider();
+                }, 300);
+              }
+              updateSlider();
+            }
+
+            function prevSlide() {
+              currentSlide--;
+              if (currentSlide === 0) {
+                setTimeout(() => {
+                  sliderUl.style.transition = 'none';
+                  currentSlide = totalSlides - 2;
+                  updateSlider();
+                }, 300);
+              }
+              updateSlider();
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            dots.forEach((dot, index) => {
+              dot.addEventListener('click', () => {
+                currentSlide = index + 1;
+                updateSlider();
+              });
+            });
+
+            // 초기 상태 설정
+            currentSlide = 1;
+            updateSlider();
+          });
+        </script>
+    </main>
+  </body>
+</html>

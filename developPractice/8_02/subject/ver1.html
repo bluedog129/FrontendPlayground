@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>무한 슬라이드</title>
+    <link rel="stylesheet" href="./ver1.css" />
+  </head>
+  <body>
+    <main>
+      <h1>슬라이드 연습</h1>
+      <section class="slide">
+        <h2>슬라이드 섹션영역</h2>
+        <div class="slide-wrap">
+          <ul class="sliderUl">
+            <!-- 슬라이드 시작 -->
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호1</p>
+                <img src="./img/1.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호2</p>
+                <img src="./img/2.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호3</p>
+                <img src="./img/3.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호4</p>
+                <img src="./img/4.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호5</p>
+                <img src="./img/5.jpg" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드 번호6</p>
+                <img src="./img/6.jpg" alt="" />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button class="btn prev">이전</button>
+        <button class="btn next">다음</button>
+        <div class="slider-dot">
+          <span class="dot1">1</span>
+          <span class="dot2">2</span>
+          <span class="dot3">3</span>
+          <span class="dot4">4</span>
+          <span class="dot5">5</span>
+          <span class="dot6">6</span>
+        </div>
+      </section>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const sliderUl = document.querySelector(".sliderUl");
+          const slides = sliderUl.querySelectorAll("li");
+          const prevBtn = document.querySelector(".prev");
+          const nextBtn = document.querySelector(".next");
+          const dots = document.querySelectorAll(".slider-dot span");
+          let currentSlide = 0;
+          const totalSlides = slides.length;
+
+          // 첫 번째와 마지막 슬라이드 복제
+          const firstSlideClone = slides[0].cloneNode(true);
+          const lastSlideClone = slides[totalSlides - 1].cloneNode(true);
+          sliderUl.appendChild(firstSlideClone);
+          sliderUl.insertBefore(lastSlideClone, slides[0]);
+
+          // 슬라이더 너비 조정
+          sliderUl.style.width = `${(totalSlides + 2) * 100}%`;
+          sliderUl.querySelectorAll("li").forEach((slide) => {
+            slide.style.width = `${100 / (totalSlides + 2)}%`;
+          });
+
+          // 슬라이더 초기 위치 설정
+          sliderUl.style.transform = `translateX(-${100 / (totalSlides + 1)}%)`;
+
+          function updateSlider(transition = true) {
+            if (transition) {
+              sliderUl.style.transition = "transform 0.5s ease-in-out";
+            } else {
+              sliderUl.style.transition = "none";
+            }
+            sliderUl.style.transform = `translateX(-${
+              (currentSlide + 1) * (100 / (totalSlides + 2))
+            }%)`;
+            updateDots();
+          }
+
+          function updateDots() {
+            dots.forEach((dot, index) => {
+              if (index === currentSlide) {
+                dot.style.backgroundColor = "black";
+                dot.style.color = "white";
+              } else {
+                dot.style.backgroundColor = "tomato";
+                dot.style.color = "black";
+              }
+            });
+          }
+
+          function nextSlide() {
+            currentSlide++;
+            updateSlider();
+            if (currentSlide === totalSlides) {
+              setTimeout(() => {
+                currentSlide = 0;
+                updateSlider(false);
+              }, 400);
+            }
+          }
+
+          function prevSlide() {
+            currentSlide--;
+            updateSlider();
+            if (currentSlide === -1) {
+              setTimeout(() => {
+                currentSlide = totalSlides - 1;
+                updateSlider(false);
+              }, 400);
+            }
+          }
+
+          nextBtn.addEventListener("click", nextSlide);
+          prevBtn.addEventListener("click", prevSlide);
+
+          dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+              currentSlide = index;
+              updateSlider();
+            });
+          });
+          // 초기 상태 설정
+          updateSlider(false);
+        });
+      </script>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="rect">사각형</div>
+    <div>
+        <input type="checkbox" id="checkbox">
+        <label for="checkbox">애니메이션 확인</label>
+
+    </div>
+    <script>
+        const $checkbox = document.querySelector("#checkbox");
+        const $rect = document.querySelector(".rect");
+
+        $checkbox.addEventListener("change", (e) => {
+            if (e.target.checked) {
+                $rect.animate(
+                    {
+                        trnasform: ["scale(1)", "scale(5)"],
+                    },
+                    {
+                        duration: 1000,
+                        easing: "ease",
+                        iterations: 3,
+                        direction: "alternate",
+                        delay: 1000,
+                        endDelay: 1000,
+                    }
+                )
+            }
+        });
+    </script>
+</body>
+</html>

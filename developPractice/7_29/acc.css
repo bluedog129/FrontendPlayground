@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+.listCon {
+  background-color: lightgray;
+}
+
+.listCon h2 {
+  cursor: pointer;
+}
+
+.listCon > li {
+  border: 1px solid red;
+}
+
+.listCon > li div {
+  /* height: 0; */
+  max-height: 0;
+  border: 1px solid lightseagreen;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.listCon p {
+  padding: 1rem;
+}
+
+.listCon > li.active {
+  background-color: tomato;
+}
+
+.listCon > li.hover div {
+  max-height: 1000px;
+}

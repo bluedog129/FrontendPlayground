@@ -1,0 +1,87 @@
+/* reset 임시 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+li {
+  list-style: none;
+}
+
+header {
+  max-width: 1200px;
+  width: calc(100% - 2rem);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gnb::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0;
+  background-color: #eaeaea;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  transition: 0.2s;
+}
+.gnb:hover::before {
+  height: 150px;
+}
+.gnb {
+  display: flex;
+}
+.gnb a {
+  display: block;
+  padding: 1rem 5rem 1rem 1rem;
+}
+.gnb > li {
+  position: relative;
+}
+.gnb > li > a {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.gnb > li:hover > a {
+  color: dodgerblue;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  width: 100%;
+}
+.gnb:hover .sub-menu {
+  display: block;
+}
+.sub-menu a {
+  font-size: 1rem;
+  padding: 0.5rem 0rem 0.5rem 1rem;
+}
+.sub-menu a::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: dodgerblue;
+  border-radius: 50%;
+  position: relative;
+  left: 10px;
+  top: -3px;
+  opacity: 0;
+  transition: 0.3s;
+}
+.sub-menu a:hover::after {
+  opacity: 1;
+  left: 15px;
+}
+.sub-menu a:hover {
+  color: dodgerblue;
+}

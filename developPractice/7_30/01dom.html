@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <ul>
+        <li><a href="#red">레드로 이동</a></li>
+      </ul>
+      <div>
+        <button class="locationBtn">페이지이동</button>
+        <button class="reloadBtn">페이지 리로드</button>
+        <button class="historyBackBtn">뒤로가기</button>
+        <button class="openWinBtn">윈도우새창열기</button>
+        <button class="openWinBtn">alert</button>
+        <button class="openWinBtn">confirm</button>
+        <button class="openWinBtn">prompt</button>
+      </div>
+      <section id="blue" style="height: 100vh; border: 1px solid blue">
+        냉무 블루영역
+        <p>내용이 입력될 곳</p>
+      </section>
+      <section id="red" style="height: 100vh; border: 1px solid red">
+        <a href="#blue">냉무2 레드영역</a>
+      </section>
+    </main>
+    <script>
+      document.querySelector(".locationBtn").addEventListener("click", () => {
+        location.href = "https://www.naver.com";
+      });
+      console.log(location.href);
+      document.querySelector(".reloadBtn").addEventListener("click", () => {
+        location.reload();
+      });
+      document
+        .querySelector(".historyBackBtn")
+        .addEventListener("click", () => {
+          //   history.forward();
+          history.go(-2);
+        });
+      //   location.hash = "top";
+      const hashtext = location.hash;
+      console.log(hashtext);
+
+      window.addEventListener("hashchange", handlehash);
+      function handlehash() {
+        const hashtest2 = location.href;
+        document.querySelector("#blue > p").innerHTML = `앵커 이름${hashtest2}`;
+      }
+      document.querySelector(".openWinBtn").addEventListener("click", () => {
+        window.open("https://www.google.com", "_blank");
+      });
+    </script>
+  </body>
+</html>

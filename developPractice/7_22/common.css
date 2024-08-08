@@ -1,0 +1,82 @@
+.sec1 {
+  border: 1px solid red;
+}
+.bannerCon {
+  border: 1px soilid lightblue;
+  padding-bottom: 30px;
+}
+
+.bannerCon > div {
+  border: 5px solid rgb(100, 100, 100);
+}
+
+.bannerCon > div > div {
+  border: 1px solid tomato;
+  height: 300px;
+}
+
+.swiper-button-next {
+  border: 5px solid rgb(100, 100, 100);
+}
+
+.swiper-button-prev {
+  border: 5px solid rgb(100, 100, 100);
+}
+
+.swiper-pagination {
+  border: 5px solid rgb(100, 100, 100);
+}
+
+.bannerCon .swiper-slide {
+  width: 60%;
+  padding-top: 35%;
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.bannerCon img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  top: 0;
+}
+
+.bannerCon .next1,
+.bannerCon .prev1 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.bannerCon .next1 {
+  right: 15%;
+}
+
+.bannerCon .prev1 {
+  left: 15%;
+  transform: translateX(10px);
+}
+
+.bannerCon .next1::after,
+.bannerCon .prev1::after {
+  content: "";
+  width: 30%;
+  height: 30%;
+  border-top: 3px solid tomato;
+  border-right: 3px solid tomato;
+  transform: rotate(45deg);
+}
+
+.bannerCon .prev1::after {
+  transform: rotate(-135deg);
+}
+
+.sec1 .pg1 {
+  width: auto;
+  left: auto;
+  right: 0;
+}

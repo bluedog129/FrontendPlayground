@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .dark {
+        background-color: black;
+        color: white;
+      }
+      #current {
+        border: 1px solid red;
+      }
+      #current > div {
+        border: 1px solid lightblue;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn1">모드변경</button>
+    <button class="btn2">요소추가</button>
+    <section>이전요소</section>
+    <div class="addItem">추가할 요소</div>
+    <section id="current">
+      <div>아이템1</div>
+      <div>아이템2</div>
+      <div>아이템3</div>
+    </section>
+    <section>다음요소</section>
+    <script>
+      const $current = document.getElementById("current");
+      const $btn2 = document.querySelector(".btn2");
+      const $addItem = document.querySelector(".addItem");
+
+      $btn2.addEventListener("click", () => {
+        // $current.appendChild($addItem);
+        // $current.append($addItem);
+        // $current.prepend($addItem);
+        // $current.before($addItem);
+        // $current.after($addItem);
+        // $current.replaceWith($addItem);
+        // $current.insertBefore($addItem, $current.lastElementChild);
+        const isHas = $current.hasChildNodes();
+        console.log(isHas);
+      });
+
+      console.log($current);
+      console.log($current.children);
+      console.log($current.childNodes);
+      console.log($current.previousElementSibling);
+      console.log($current.nextElementSibling);
+      console.log($current.parentElement);
+      const $btn1 = document.querySelector(".btn1");
+      $btn1.addEventListener("click", function () {
+        document.body.classList.toggle("dark");
+      });
+    </script>
+  </body>
+</html>

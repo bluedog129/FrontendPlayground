@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .log {
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <input type="file" id="myFile" accept=".png" />
+      <p class="log"><img src="" alt="" /></p>
+    </main>
+    <script>
+      const $myFile = document.querySelector("#myFile");
+      const imgElem = document.querySelector(".log img");
+
+      $myFile.addEventListener("input", (e) => {
+        console.log(e);
+        console.log(e.target.files[0]);
+
+        // imgElem.src = `./img/e.target.files[0].name`;
+        // FileReader 객체를 이용해 파일을 읽어옴
+        const files = e.target.files;
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", (e) => {
+          console.log(reader.result);
+          imgElem.src = reader.result;
+        });
+        reader.readAsDataURL(file);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-image: url(./arsenal-club-logo.jpg);
+        background-size: 10%;
+      }
+      .modal {
+        display: none;
+        background-color: rgba(255, 255, 255, 0.5);
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+      }
+      .modal .inner {
+        width: 45%;
+        padding: 100px;
+        border: 1px solid red;
+        margin: 100px auto 0 auto;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+      }
+      .modal .closeBtn {
+        position: absolute;
+        right: calc(20% + 10px);
+        margin-top: 1rem;
+        /* top: 500px; */
+      }
+      .openBtn {
+        position: relative;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="openBtn">모달오픈</button>
+    <!-- <section class="modal">
+      <div class="inner">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem quisquam
+        iure assumenda deserunt veniam odit id nostrum labore velit obcaecati
+        minus ut molestias quis, repudiandae voluptates esse! Quia, minus
+        temporibus?
+      </div>
+      <button class="closeBtn">닫기</button>
+    </section> -->
+
+    <script>
+      const $openBtn = document.querySelector(".openBtn");
+      const $closeBtn = document.querySelector(".closeBtn");
+
+      const displayModal = () => {
+        const $modal = document.createElement("section");
+        $modal.classList.add("modal");
+        const $inner = document.createElement("div");
+        $inner.classList.add("inner");
+        $inner.innerHTML =
+          `<div class="inner">내용</div>` +
+          `<button class="closeBtn">닫기</button>`;
+        $modal.appendChild($inner);
+        document.body.appendChild($modal);
+      };
+      $openBtn.addEventListener("click", displayModal);
+      $closeBtn.addEventListener("click", () => {
+        document.querySelector(".modal").remove();
+      });
+      //   const $openBtn = document.querySelector(".openBtn");
+      //   const $modal = document.querySelector(".modal");
+      //   $openBtn.addEventListener("click", () => {
+      //     $modal.classList.toggle("on");
+      //   });
+      //   $openBtn.addEventListener("click", () => {
+      //     $modal.classList.remove("on");
+      //   });
+    </script>
+  </body>
+</html>

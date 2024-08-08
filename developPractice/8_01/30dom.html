@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .point {
+        margin: 2rem;
+        width: 50px;
+        height: 50px;
+        border: 3px solid lightblue;
+        border-radius: 50%;
+        position: absolute;
+        animation: rotate infinite 3s linear;
+        will-change: transform;
+      }
+
+      .point::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: lightcoral;
+        border-radius: 50%;
+        transform: translate(2px, 2px);
+      }
+      @keyframes rotate {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="point"></div>
+    <p class="log">마우스 좌표</p>
+
+    <script>
+      const $point = document.querySelector(".point");
+      let mouseX = 0;
+      let mouseY = 0;
+      let currentX = 0;
+      let currnetY = 0;
+
+      window.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        console.log(mouseX, mouseY);
+      });
+
+      const tick = () => {
+        requestAnimationFrame(tick);
+
+        currentX += (mouseX - (currentX + 50)) * 0.2;
+        currnetY += (mouseY - (currnetY + 50)) * 0.2;
+        // console.log("tick");
+        // $point.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        $point.style.top = `${mouseY}px`;
+        $point.style.left = `${mouseX}px`;
+      };
+      tick();
+    </script>
+  </body>
+</html>

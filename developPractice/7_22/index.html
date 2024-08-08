@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="myreset.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="common.css" />
+  </head>
+  <body>
+    <section class="sec1">
+      <div class="swiper bannerCon">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./img/banner1.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="img/banner2.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="img/banner3.png" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="img/banner4.png" alt="" />
+          </div>
+        </div>
+        <div class="swiper-button-next next1"></div>
+        <div class="swiper-button-prev prev1"></div>
+        <div class="swiper-pagination pg1"></div>
+      </div>
+    </section>
+
+    <section data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+      <h2 style="height: 300px; border: 2px solid green">움직인다</h2>
+    </section>
+    <section style="height: 100vh">임시</section>
+    <!-- aos -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+      // swiper 사용 부분
+      var swiper = new Swiper(".bannerCon", {
+        navigation: {
+          nextEl: ".next1",
+          prevEl: ".prev1",
+        },
+        pagination: {
+          el: ".pg1",
+        },
+        spaceBetween: 30,
+        centeredSlides: true,
+        loop: true,
+        slidesPerView: "auto",
+      });
+      // AOS 사용 부분
+      AOS.init();
+    </script>
+  </body>
+</html>
