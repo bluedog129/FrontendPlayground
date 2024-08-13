@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* header */
+
+.header > .header__top {
+  display: flex;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+.logo {
+  margin-right: 8vw;
+}
+
+.logo img {
+  height: 90px;
+}
+
+.nav__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__item {
+  margin-right: 60px;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.nav__link:hover {
+  color: #d32f2f;
+}
+
+.header__bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header__bottom__wrapper {
+  display: flex;
+  width: 550px;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  padding: 5px 10px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#genres {
+  width: auto;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.search-bar {
+  display: flex;
+}
+
+.header__bottom input {
+  border: none;
+  outline: none;
+  padding: 10px;
+  flex-grow: 1;
+  font-size: 16px;
+  margin-right: 100px;
+}
+
+.header__bottom button {
+  background-color: black;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.search-bar button img {
+  width: 20px;
+  height: 20px;
+}
+
+.search-bar button:hover {
+  background-color: #d32f2f;
+}
+
+/* main */
+
+.main {
+  margin: 20px 5%;
+  border: 1px solid #ccc;
+}
+
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+/* 이벤트 아이템(영화 카드) 스타일 */
+.event-item {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.event-item:hover {
+  transform: translateY(-5px);
+}
+
+.event-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.event-item-content {
+  padding: 15px;
+}
+
+.event-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.event-item p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+/* 평점 스타일 */
+.event-item .rating {
+  font-weight: bold;
+  color: #f39c12;
+}
+
+/* 개봉일 스타일 */
+.event-item .release-date {
+  font-style: italic;
+}

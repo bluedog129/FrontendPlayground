@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="common.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <section class="header__top">
+        <div class="logo">
+          <img src="./img/movielogo_black.png" alt="movielogo" />
+        </div>
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#" class="nav__link">Top rated</a>
+            </li>
+            <li class="nav__item">
+              <a href="#" class="nav__link">Upcoming</a>
+            </li>
+            <li class="nav__item">
+              <a href="#" class="nav__link">Now playing</a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      <section class="header__bottom">
+        <form class="header__bottom__wrapper">
+          <select id="genres" name="genres">
+            <option value="" disabled selected>Type of genres</option>
+          </select>
+          <div class="search-bar">
+            <input type="text" placeholder="영화를 검색해보세요!" />
+            <button type="submit">
+              <img src="./img/search.png" alt="Search" />
+            </button>
+          </div>
+        </form>
+      </section>
+    </header>
+    <main class="main">
+      <section class="events-section">
+        <ul class="event-list"></ul>
+      </section>
+      <section class="pagination"></section>
+    </main>
+  </body>
+</html>
