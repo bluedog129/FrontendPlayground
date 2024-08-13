@@ -1,23 +1,13 @@
-function fetchNowPlayingMovies() {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWQyNmNkY2U4NmExNGNhYjRkNzljZTRmZDNhYzczMCIsIm5iZiI6MTcyMzQ1MDQ3MS42MTU4MDQsInN1YiI6IjY2YjlhOWY0ODZjZDZjOWVjYmE4MDI1OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5MqE7u7nSse6AZNP7FDX30_vIrItBdYeh0-50gwsGII",
-    },
-  };
+const $searchInput = document.querySelector(".search-bar input");
+const $eventList = document.querySelector(".event-list");
+const $pagination = document.querySelector(".pagination");
 
-  fetch(
-    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err));
-}
+let currentCategory = ""; // 현재 렌더링 중인 영화 카테고리
+let allMovies = []; // 현재 카테고리의 모든 영화를 저장하는 배열
+let currentPage = 1; // 현재 페이지
+const moviesPerPage = 20; // 페이지당 보여주는 영화 수
 
-function fetchTopRatedMovies() {
+function fetchNowPlayingMovies(page = 1) {
   const options = {
     method: "GET",
     headers: {
@@ -28,7 +18,7 @@ function fetchTopRatedMovies() {
   };
 
   return fetch(
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+    `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`,
     options
   )
     .then((response) => response.json())
@@ -38,7 +28,7 @@ function fetchTopRatedMovies() {
     });
 }
 
-function fetchUpcomingMovies() {
+function fetchTopRatedMovies(page = 1) {
   const options = {
     method: "GET",
     headers: {
@@ -48,45 +38,21 @@ function fetchUpcomingMovies() {
     },
   };
 
-  fetch(
-    "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+  return fetch(
+    `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`,
     options
   )
     .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err));
-}
-
-function renderMovieList(movies) {
-  const eventList = document.querySelector(".event-list");
-  eventList.innerHTML = ""; // 기존 내용을 지우고 새로 렌더링
-  movies.forEach((movie) => {
-    const listItem = document.createElement("li");
-    listItem.className = "event-item";
-    listItem.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" />
-      <div class="event-item-content">
-        <h3>${movie.title}</h3>
-        <p class="rating">Rating: ${movie.vote_average}</p>
-        <p class="release-date">Release Date: ${movie.release_date}</p>
-      </div>
-    `;
-    eventList.appendChild(listItem);
-  });
-}
-
-function init() {
-  fetchTopRatedMovies()
-    .then((response) => {
-      if (response.results && Array.isArray(response.results)) {
-        renderMovieList(response.results);
-      } else {
-        console.error("Unexpected response format:", response);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching top rated movies:", error);
+    .catch((err) => {
+      console.error(err);
+      throw err;
     });
 }
 
-init();
+function fetchUpcomingMovies(page = 1) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWQyNmNkY2U4NmExNGNhYjRkNzljZTRmZDNhYzczMCIsIm5iZiI6MTcyMzQ1MDQ3MS42MTU4MDQsInN1YiI6IjY2YjlhOWY0ODZjZDZjOWVjYmE4MDI1OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJ
