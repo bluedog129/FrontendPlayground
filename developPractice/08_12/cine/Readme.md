@@ -12,6 +12,9 @@
 
 ## 주요 기능 구현 과정
 
-## 활용 API
+### API 사용
 
-https://api.themoviedb.org/3/movie
+- API 키 준비
+
+```
+  const opti
