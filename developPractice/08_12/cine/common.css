@@ -137,19 +137,27 @@
 
 .event-item-image {
   width: 100%;
-  height: 300px; /* 고정 높이 설정 */
+  height: 0;
+  padding-bottom: 150%; /* 2:3 비율 유지 */
+  position: relative;
   overflow: hidden;
 }
 
 .event-item-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 .event-item-image img.no-image {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   background-color: #f0f0f0;
+  padding: 20px;
 }
 
 .event-item-content {
@@ -216,4 +224,381 @@
   background-color: #f39c12;
   color: white;
   border-color: #f39c12;
+}
+
+/* 모달 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 1000px;
+  border-radius: 10px;
+}
+
+#close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease; /* 부드러운 색상 전환을 위해 추가 */
+  z-index: 10;
+}
+
+#close:hover,
+#close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-body {
+  display: flex;
+  padding-top: 220px;
+}
+
+.modal-poster {
+  width: 200px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.modal-info {
+  flex: 1;
+}
+
+.modal-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modal-year-runtime,
+.modal-rating,
+.modal-genres {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.modal-overview {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 20px;
+}
+
+.modal-related {
+  margin-top: 30px;
+}
+
+.related-movies {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.related-movie {
+  width: 30%;
+  text-align: center;
+}
+
+.related-movie img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.trailer-button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.trailer-button:hover {
+  background-color: #e67e22;
+}
+
+/* 모달창 css */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 1000px;
+  border-radius: 10px;
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-body {
+  display: flex;
+  padding-top: 220px;
+}
+
+.modal-poster {
+  width: 330px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.modal-info {
+  flex: 1;
+}
+
+.modal-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modal-year-runtime,
+.modal-rating,
+.modal-genres {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.modal-overview {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 20px;
+}
+
+.modal-cast {
+  margin-top: 20px;
+}
+
+.cast-list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.cast-member {
+  width: 23%;
+  text-align: center;
+}
+
+.cast-member img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.modal-related {
+  margin-top: 75px;
+}
+
+.related-movies {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.related-movie {
+  width: 23%;
+  text-align: center;
+}
+
+.related-movie img {
+  width: 90%;
+  height: 90%;
+  border-radius: 5px;
+}
+
+.trailer-button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.trailer-button:hover {
+  background-color: #e67e22;
+}
+
+/* 반응형 스타일 */
+@media screen and (max-width: 700px) {
+  /* 헤더 스타일 */
+  .header > .header__top {
+    flex-direction: column;
+    padding: 15px 10px;
+  }
+
+  .logo {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .logo img {
+    height: 60px;
+  }
+
+  .nav__list {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav__item {
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+
+  .nav__link {
+    font-size: 16px;
+  }
+
+  .header__bottom__wrapper {
+    width: 90%;
+    flex-direction: column;
+  }
+
+  #genres {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .header__bottom input {
+    margin-right: 10px;
+  }
+
+  /* 메인 콘텐츠 스타일 */
+  .event-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .event-item h3 {
+    font-size: 14px;
+  }
+
+  .event-item p {
+    font-size: 12px;
+  }
+
+  /* 페이지네이션 스타일 */
+  .page-button {
+    margin: 10px 2px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  /* 모달 스타일 */
+  .modal-content {
+    width: 95%;
+    margin: 2% auto;
+    padding: 10px;
+  }
+
+  .modal-backdrop {
+    height: 100px;
+  }
+
+  .modal-body {
+    flex-direction: column;
+    padding-top: 120px;
+  }
+
+  .modal-poster {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto 20px;
+  }
+
+  .modal-title {
+    font-size: 20px;
+  }
+
+  .modal-year-runtime,
+  .modal-rating,
+  .modal-genres,
+  .modal-overview {
+    font-size: 14px;
+  }
+
+  .cast-list,
+  .related-movies {
+    flex-wrap: wrap;
+  }
+
+  .cast-member,
+  .related-movie {
+    width: 48%;
+    margin-bottom: 10px;
+  }
+
+  .trailer-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .event-item-image {
+    padding-bottom: 150%; /* 2:3 비율 유지 */
+  }
 }

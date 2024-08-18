@@ -5,9 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="common.css" />
-    <script src="index.js" defer></script>
+    <script src="index.js" type="module" defer></script>
   </head>
   <body>
+    <div id="movieModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-backdrop"></div>
+        <div class="modal-body">
+          <img class="modal-poster" src="" alt="Movie Poster" />
+          <div class="modal-info">
+            <h2 class="modal-title"></h2>
+            <p class="modal-year-runtime"></p>
+            <p class="modal-rating"></p>
+            <p class="modal-genres"></p>
+            <p class="modal-overview"></p>
+            <div class="modal-cast">
+              <h3>Top Cast</h3>
+              <div class="cast-list"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-related">
+          <h3>Related Movies</h3>
+          <div class="related-movies"></div>
+        </div>
+        <button class="trailer-button">Watch Trailer</button>
+      </div>
+    </div>
     <header class="header">
       <section class="header__top">
         <div class="logo">

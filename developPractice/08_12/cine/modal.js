@@ -1,0 +1,170 @@
+const API_KEY =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWQyNmNkY2U4NmExNGNhYjRkNzljZTRmZDNhYzczMCIsIm5iZiI6MTcyMzQ1MDQ3MS42MTU4MDQsInN1YiI6IjY2YjlhOWY0ODZjZDZjOWVjYmE4MDI1OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5MqE7u7nSse6AZNP7FDX30_vIrItBdYeh0-50gwsGII";
+
+function fetchMovieDetails(movieId) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+    options
+  )
+    .then((response) => response.json())
+    .catch((err) => console.error(err));
+}
+
+function fetchMovieCredits(movieId) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`,
+    options
+  )
+    .then((response) => response.json())
+    .catch((err) => console.error(err));
+}
+
+function fetchRelatedMovies(movieId) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/similar?language=en-US&page=1`,
+    options
+  )
+    .then((response) => response.json())
+    .catch((err) => console.error(err));
+}
+
+function fetchMovieTrailer(movieId) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+    options
+  )
+    .then((response) => response.json())
+    .catch((err) => console.error(err));
+}
+
+function showMovieDetails(movieId) {
+  const $modal = document.getElementById("movieModal");
+
+  Promise.all([
+    fetchMovieDetails(movieId),
+    fetchMovieCredits(movieId),
+    fetchRelatedMovies(movieId),
+    fetchMovieTrailer(movieId),
+  ])
+    .then(([details, credits, relatedMovies, trailerData]) => {
+      const $modalBackdrop = document.querySelector(".modal-backdrop");
+      const $modalPoster = document.querySelector(".modal-poster");
+      const $modalTitle = document.querySelector(".modal-title");
+      const $modalYearRuntime = document.querySelector(".modal-year-runtime");
+      const $modalRating = document.querySelector(".modal-rating");
+      const $modalGenres = document.querySelector(".modal-genres");
+      const $modalOverview = document.querySelector(".modal-overview");
+      const $castList = document.querySelector(".cast-list");
+
+      $modalBackdrop.style.backgroundImage = `url(https://image.tmdb.org/t/p/w1280${details.backdrop_path})`;
+      $modalPoster.src = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
+      $modalTitle.textContent = details.original_title;
+      $modalYearRuntime.textContent = `${new Date(
+        details.release_date
+      ).getFullYear()} | ${details.runtime} min`;
+      $modalRating.textContent = `Rating: ${details.vote_average.toFixed(1)}`;
+      $modalGenres.textContent = `Genres: ${details.genres
+        .map((genre) => genre.name)
+        .join(", ")}`;
+      $modalOverview.textContent = details.overview;
+
+      const topCast = credits.cast
+        .filter((member) => member.known_for_department === "Acting")
+        .sort((a, b) => b.popularity - a.popularity)
+        .slice(0, 4);
+
+      $castList.innerHTML = topCast
+        .map(
+          (member) => `
+        <div class="cast-member">
+          <img src="https://image.tmdb.org/t/p/w185${member.profile_path}" alt="${member.name}">
+          <p>${member.name}</p>
+        </div>
+      `
+        )
+        .join("");
+
+      const $relatedMovies = document.querySelector(".related-movies");
+      $relatedMovies.innerHTML = relatedMovies.results
+        .slice(0, 4)
+        .map(
+          (movie) => `
+          <div class="related-movie">
+            <img src="https://image.tmdb.org/t/p/w185${movie.poster_path}" alt="${movie.title}">
+            <p>${movie.title}</p>
+          </div>
+        `
+        )
+        .join("");
+
+      const $trailerButton = document.querySelector(".trailer-button");
+      const trailer = trailerData.results.find(
+        (video) => video.type === "Trailer" && video.site === "YouTube"
+      );
+
+      if (trailer) {
+        $trailerButton.style.display = "block";
+        $trailerButton.onclick = () => {
+          window.open(
+            `https://www.youtube.com/watch?v=${trailer.key}`,
+            "_blank"
+          );
+        };
+      } else {
+        $trailerButton.style.display = "none";
+      }
+
+      $modal.style.display = "block";
+    })
+    .catch((err) => console.error(err));
+}
+
+function initializeModal() {
+  const $modal = document.getElementById("movieModal");
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      $modal.style.display = "none";
+    }
+  });
+
+  window.addEventListener("click", function (event) {
+    if (event.target == $modal) {
+      $modal.style.display = "none";
+    }
+  });
+}
+
+export { showMovieDetails, initializeModal };
