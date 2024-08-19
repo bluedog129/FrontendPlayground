@@ -4,15 +4,17 @@ const API_KEY =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWQyNmNkY2U4NmExNGNhYjRkNzljZTRmZDNhYzczMCIsIm5iZiI6MTcyMzQ1MDQ3MS42MTU4MDQsInN1YiI6IjY2YjlhOWY0ODZjZDZjOWVjYmE4MDI1OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5MqE7u7nSse6AZNP7FDX30_vIrItBdYeh0-50gwsGII";
 
 const $searchInput = document.querySelector(".search-bar input");
+const $genreSelect = document.getElementById("genres");
+const $decadeSelect = document.getElementById("decades");
 const $eventList = document.querySelector(".event-list");
 const $pagination = document.querySelector(".pagination");
 
-let currentCategory = "";
+let currentCategory = "topRated";
 let allMovies = [];
 let currentPage = 1;
 const moviesPerPage = 20;
 
-function fetchMovies(category, page = 1) {
+function fetchMovies(category, page = 1, decade = "") {
   const options = {
     method: "GET",
     headers: {
@@ -21,21 +23,34 @@ function fetchMovies(category, page = 1) {
     },
   };
 
-  let url;
+  let url = `https://api.themoviedb.org/3/discover/movie?language=en-US&page=${page}`;
+
+  if (decade && decade !== "") {
+    const [startYear, endYear] = getYearRangeFromDecade(decade);
+    url += `&primary_release_date.gte=${startYear}-01-01&primary_release_date.lte=${endYear}-12-31`;
+  }
+
   switch (category) {
     case "topRated":
-      url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`;
+      url += "&sort_by=vote_average.desc&vote_count.gte=1000";
       break;
     case "upComing":
-      url = `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`;
+      url +=
+        "&sort_by=primary_release_date.asc&primary_release_date.gte=${new Date().toISOString().split('T')[0]}";
       break;
     case "nowPlaying":
-      url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`;
+      const today = new Date();
+      const oneMonthAgo = new Date(today.setMonth(today.getMonth() - 1));
+      url += `&sort_by=popularity.desc&primary_release_date.gte=${
+        oneMonthAgo.toISOString().split("T")[0]
+      }&primary_release_date.lte=${new Date().toISOString().split("T")[0]}`;
       break;
     default:
       console.error("Invalid category");
       return Promise.reject("Invalid category");
   }
+
+  console.log("Fetching URL:", url);
 
   return fetch(url, options)
     .then((response) => response.json())
@@ -43,6 +58,13 @@ function fetchMovies(category, page = 1) {
       console.error(err);
       throw err;
     });
+}
+
+function getYearRangeFromDecade(decade) {
+  const decadeStart = parseInt(decade);
+  return decade === "pre1950"
+    ? [1900, 1949] // 1950년대 이전
+    : [decadeStart, decadeStart + 9];
 }
 
 function renderMovieList(movies) {
@@ -101,10 +123,20 @@ function addPageButton(text, page, isActive = false) {
 function loadMovies(category, page = 1) {
   currentPage = page;
   currentCategory = category;
+  const selectedDecade = $decadeSelect.value;
 
-  fetchMovies(category, currentPage)
+  console.log(
+    "Loading movies - Category:",
+    category,
+    "Page:",
+    page,
+    "Decade:",
+    selectedDecade
+  );
+  fetchMovies(category, currentPage, selectedDecade)
     .then((response) => {
       if (response.results && Array.isArray(response.results)) {
+        console.log("Fetched movies:", response.results);
         allMovies = response.results;
         renderMovieList(allMovies);
         renderPagination(response.total_pages);
@@ -142,6 +174,11 @@ document.getElementById("nowPlaying").addEventListener("click", (e) => {
 $searchInput.addEventListener("input", (e) => {
   const searchTerm = e.target.value;
   filterInputMovies(searchTerm);
+});
+
+$decadeSelect.addEventListener("change", () => {
+  console.log("Decade changed:", $decadeSelect.value);
+  loadMovies(currentCategory, 1); // 페이지를 1로 리셋
 });
 
 function init() {

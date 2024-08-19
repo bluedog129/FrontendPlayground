@@ -88,8 +88,23 @@ function showMovieDetails(movieId) {
       const $modalOverview = document.querySelector(".modal-overview");
       const $castList = document.querySelector(".cast-list");
 
-      $modalBackdrop.style.backgroundImage = `url(https://image.tmdb.org/t/p/w1280${details.backdrop_path})`;
-      $modalPoster.src = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
+      // 백드롭 이미지 처리
+      if (details.backdrop_path) {
+        $modalBackdrop.style.backgroundImage = `url(https://image.tmdb.org/t/p/w1280${details.backdrop_path})`;
+      } else {
+        $modalBackdrop.style.backgroundImage = "none";
+        $modalBackdrop.style.backgroundColor = "#f0f0f0";
+      }
+
+      // 포스터 이미지 처리
+      $modalPoster.src = details.poster_path
+        ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
+        : "./img/no_image.jpg";
+      $modalPoster.onerror = function () {
+        this.src = "./img/no_image.jpg";
+        this.classList.add("no-image");
+      };
+
       $modalTitle.textContent = details.original_title;
       $modalYearRuntime.textContent = `${new Date(
         details.release_date
@@ -109,7 +124,13 @@ function showMovieDetails(movieId) {
         .map(
           (member) => `
         <div class="cast-member">
-          <img src="https://image.tmdb.org/t/p/w185${member.profile_path}" alt="${member.name}">
+          <img src="${
+            member.profile_path
+              ? `https://image.tmdb.org/t/p/w185${member.profile_path}`
+              : "./img/no_image.jpg"
+          }" 
+               alt="${member.name}"
+               onerror="this.src='./img/no_image.jpg'; this.classList.add('no-image');">
           <p>${member.name}</p>
         </div>
       `
@@ -122,7 +143,13 @@ function showMovieDetails(movieId) {
         .map(
           (movie) => `
           <div class="related-movie">
-            <img src="https://image.tmdb.org/t/p/w185${movie.poster_path}" alt="${movie.title}">
+            <img src="${
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w185${movie.poster_path}`
+                : "./img/no_image.jpg"
+            }" 
+                 alt="${movie.title}"
+                 onerror="this.src='./img/no_image.jpg'; this.classList.add('no-image');">
             <p>${movie.title}</p>
           </div>
         `
