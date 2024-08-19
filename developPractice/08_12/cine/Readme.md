@@ -7,8 +7,9 @@
 ## 핵심 서비스
 
 - 실시간 개봉 중 영화, 개봉 예정 영화에 대한 정보 제공
-- 평점 별로 영화를 필터링 하는 기능 제공
-- 각 영화 별 상세 정보 제공 (장르, 평점, 트레일러, 기간 등)
+- 평점을 기준으로 영화 순위를 정렬하여 제공
+- 연도 별로 영화를 필터 해주는 기능 (마찬가지로 평점을 기준으로 정렬되어 제공)
+- 각 영화 별 상세 정보 제공 (장르, 평점, 트레일러, 개봉연도, 출연진 등)
 
 ## 주요 기능 구현 과정
 
@@ -186,6 +187,83 @@ function addPageButton(text, page, isActive = false) {
 초기화: init() 함수가 호출되어 초기 카테고리(Top Rated)의 첫 번째 페이지가 로드됩니다.<br>
 페이지네이션 렌더링: 첫 페이지 로드 후, 페이지네이션 버튼들이 화면에 표시됩니다.<br>
 페이지 전환: 사용자가 페이지네이션 버튼을 클릭하면 loadMovies 함수가 호출되어 해당 페이지의 영화 목록이 로드되고, 페이지네이션 버튼이 다시 렌더링됩니다.<br>
+
+### 연도 별로 영화를 필터 해주는 기능
+
+API 요청 시 연도 필터링 <br>
+
+- 사용자가 특정 연대를 선택하면, 해당 연대에 맞는 영화 데이터가 API를 통해 필터링되어 요청됩니다. <br>
+  연대는 primary_release_date.gte 및 primary_release_date.lte 매개변수를 통해 지정된 범위로 설정됩니다.<br>
+
+```
+  function fetchMovies(category, page = 1, decade = "") {
+    let url = `https://api.themoviedb.org/3/discover/movie?language=en-US&page=${page}`;
+
+    if (decade && decade !== "") {
+      const [startYear, endYear] = getYearRangeFromDecade(decade);
+      url += `&primary_release_date.gte=${startYear}-01-01&primary_release_date.lte=${endYear}-12-31`;
+    }
+    // 나머지 API URL 구성 로직...
+  }
+
+  function getYearRangeFromDecade(decade) {
+    const decadeStart = parseInt(decade);
+    return decade === "pre1950"
+      ? [1900, 1949] // 1950년대 이전
+      : [decadeStart, decadeStart + 9];
+  }
+```
+
+### 각 영화 별 상세 정보 (장르, 평점, 트레일러, 개봉연도, 출연진 등)
+
+- 영화 상세정보 API 호출
+
+사용자가 특정 영화를 클릭하면 해당 영화의 ID를 이용해 TMDB API를 호출하여 영화의 세부 정보를 가져옵니다.<br>
+이 API 호출은 영화의 기본 정보, 출연진, 관련 영화, 트레일러를 포함하여 다양한 데이터를 가져오도록 구성됩니다.<br>
+
+```
+function fetchMovieDetails(movieId) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+    options
+  )
+    .then((response) => response.json())
+    .catch((err) => console.error(err));
+}
+```
+
+- 영화 상세 정보 표시
+
+Modal을 통한 정보 표시
+위에서 가져온 데이터를 바탕으로, showMovieDetails 함수는 모달 창을 통해 영화의 상세 정보를 사용자에게 제공합니다.<br>
+이 모달에는 영화의 포스터, 제목, 개봉연도, 평점, 장르, 개요, 출연진, 관련 영화, 트레일러 등이 포함됩니다.<br>
+
+```
+function showMovieDetails(movieId) {
+  const $modal = document.getElementById("movieModal");
+
+  Promise.all([
+    fetchMovieDetails(movieId),
+    fetchMovieCredits(movieId),
+    fetchRelatedMovies(movieId),
+    fetchMovieTrailer(movieId),
+  ])
+    .then(([details, credits, relatedMovies, trailerData]) => {
+      // 모달 데이터 표시 로직
+    })
+    .catch((err) => console.error(err));
+}
+```
+
+이 기능은 사용자가 특정 영화를 클릭했을 때, 영화에 대한 종합적인 정보를 제공하여 사용자가 영화 선택을 더 쉽게 할 수 있도록 돕습니다.<br>
 
 ## 활용 API
 
