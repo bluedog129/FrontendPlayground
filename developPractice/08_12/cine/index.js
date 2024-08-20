@@ -154,6 +154,19 @@ function filterInputMovies(searchTerm) {
   renderMovieList(filteredMovies);
 }
 
+function resetToMain() {
+  currentCategory = "topRated";
+  currentPage = 1;
+  $searchInput.value = "";
+  $decadeSelect.value = "";
+  loadMovies(currentCategory, currentPage);
+}
+
+document.getElementById("logoLink").addEventListener("click", function (e) {
+  e.preventDefault();
+  resetToMain();
+});
+
 document.getElementById("topRated").addEventListener("click", (e) => {
   e.preventDefault();
   loadMovies("topRated");

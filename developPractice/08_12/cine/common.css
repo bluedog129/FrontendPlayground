@@ -35,7 +35,7 @@
 .nav__link {
   text-decoration: none;
   color: black;
-  font-size: 2.3vw;
+  font-size: 1.5vw;
   font-weight: bold;
 }
 
@@ -601,4 +601,53 @@ body.modal-open {
   /* 모달 스타일 */
   .modal-content {
     width: 95%;
-    margin: 2% 
+    margin: 2% auto;
+    padding: 10px;
+  }
+
+  .modal-backdrop {
+    height: 100px;
+  }
+
+  .modal-body {
+    flex-direction: column;
+    padding-top: 120px;
+  }
+
+  .modal-poster {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto 20px;
+  }
+
+  .modal-title {
+    font-size: 20px;
+  }
+
+  .modal-year-runtime,
+  .modal-rating,
+  .modal-genres,
+  .modal-overview {
+    font-size: 14px;
+  }
+
+  .cast-list,
+  .related-movies {
+    flex-wrap: wrap;
+  }
+
+  .cast-member,
+  .related-movie {
+    width: 48%;
+    margin-bottom: 10px;
+  }
+
+  .trailer-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .event-item-image {
+    padding-bottom: 150%; /* 2:3 비율 유지 */
+  }
+}
