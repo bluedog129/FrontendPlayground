@@ -7,9 +7,9 @@
 }
 
 body {
-  font-family: "Merriweather", serif;
-  /* font-family: 'Crimson Text', serif; */
+  /* font-family: "Merriweather", serif; */
   /* font-family: "Libre Baskerville", serif; */
+  font-family: "Crimson Text", serif;
 }
 
 img,
@@ -23,37 +23,31 @@ img,
 
 /* header */
 
-.header > .header__top {
+.header__top {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  padding: 30px 20px;
-}
-
-.logo {
-  margin-right: 8vw;
+  justify-content: space-between;
+  padding: 10px 40px;
 }
 
 .logo img {
-  height: 90px;
+  height: 70px;
 }
 
 .nav__list {
   display: flex;
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .nav__item {
-  margin-right: 60px;
+  margin-right: 40px;
 }
 
 .nav__link {
   text-decoration: none;
-  color: black;
-  font-size: 1.5vw;
-  font-weight: bold;
+  color: #333;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
 }
 
 .nav__link:hover {
@@ -64,41 +58,33 @@ img,
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 25px 0;
+  padding: 10px 0 15px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .header__bottom__wrapper {
-  display: flex;
-  width: 550px;
-  justify-content: space-between;
+  width: 100%;
+  max-width: 550px;
   border: 1px solid #ccc;
   border-radius: 25px;
-  padding: 5px 10px;
+  padding: 5px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#decades {
-  width: auto;
-  padding: 10px;
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  margin-right: 10px;
-}
-
 .search-bar {
   display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .header__bottom input {
+  flex-grow: 1;
   border: none;
   outline: none;
   padding: 10px;
-  flex-grow: 1;
   font-size: 16px;
-  margin-right: 100px;
+  background: transparent;
 }
 
 .header__bottom button {
@@ -112,6 +98,7 @@ img,
   justify-content: center;
   cursor: pointer;
   margin-left: 10px;
+  flex-shrink: 0;
 }
 
 .search-bar button img {
@@ -121,6 +108,23 @@ img,
 
 .search-bar button:hover {
   background-color: #f39c12;
+}
+
+.favorite-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.favorite-btn img {
+  width: 45px;
+  height: 45px;
+  transition: filter 0.3s ease;
+}
+
+.favorite-btn:hover img {
+  filter: invert(72%) sepia(98%) saturate(1052%) hue-rotate(338deg)
+    brightness(101%) contrast(96%);
 }
 
 /* main */
@@ -550,18 +554,33 @@ body.modal-open {
 /* 반응형 스타일 */
 @media screen and (max-width: 700px) {
   /* 헤더 스타일 */
-  .header > .header__top {
-    flex-direction: column;
-    padding: 15px 10px;
+  .header__top {
+    flex-wrap: wrap;
+    padding: 15px 20px;
   }
 
   .logo {
-    margin-right: 0;
-    margin-bottom: 15px;
+    order: 1;
+    margin-right: auto;
   }
 
   .logo img {
-    height: 60px;
+    height: 50px;
+  }
+
+  .favorite-btn {
+    order: 2;
+  }
+
+  .favorite-btn img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
   }
 
   .nav__list {
@@ -570,7 +589,7 @@ body.modal-open {
   }
 
   .nav__item {
-    margin-right: 20px;
+    margin-right: 10px;
     margin-bottom: 10px;
   }
 
@@ -578,14 +597,9 @@ body.modal-open {
     font-size: 16px;
   }
 
+  /* 나머지 스타일은 그대로 유지 */
   .header__bottom__wrapper {
     width: 90%;
-    flex-direction: column;
-  }
-
-  #genres {
-    width: 100%;
-    margin-bottom: 10px;
   }
 
   .search-bar {

@@ -58,38 +58,38 @@
         <nav class="nav">
           <ul class="nav__list">
             <li class="nav__item">
-              <a href="#" class="nav__link" id="topRated">Top rated</a>
+              <a href="#" class="nav__link" data-decade="pre1950">pre 1950s</a>
             </li>
             <li class="nav__item">
-              <a href="#" class="nav__link" id="upComing">Upcoming</a>
+              <a href="#" class="nav__link" data-decade="1950">1950s</a>
             </li>
             <li class="nav__item">
-              <a href="#" class="nav__link" id="nowPlaying">Now playing</a>
+              <a href="#" class="nav__link" data-decade="1960">1960s</a>
+            </li>
+            <li class="nav__item">
+              <a href="#" class="nav__link" data-decade="1970">1970s</a>
+            </li>
+            <li class="nav__item">
+              <a href="#" class="nav__link" data-decade="1980">1980s</a>
+            </li>
+            <li class="nav__item">
+              <a href="#" class="nav__link" data-decade="1990">1990s</a>
             </li>
           </ul>
         </nav>
+        <button class="favorite-btn">
+          <img src="./img/star.svg" alt="Favorites" />
+        </button>
       </section>
       <section class="header__bottom">
-        <form class="header__bottom__wrapper">
-          <select id="decades" name="decades">
-            <option value="">All Years</option>
-            <option value="pre1950">1950s 이전</option>
-            <option value="1950">1950s</option>
-            <option value="1960">1960s</option>
-            <option value="1970">1970s</option>
-            <option value="1980">1980s</option>
-            <option value="1990">1990s</option>
-            <option value="2000">2000s</option>
-            <option value="2010">2010s</option>
-            <option value="2020">2020s (현재)</option>
-          </select>
-          <div class="search-bar">
-            <input type="text" placeholder="search your old movies!" />
+        <div class="header__bottom__wrapper">
+          <form class="search-bar">
+            <input type="text" placeholder="Search for classic movies" />
             <button type="submit">
               <img src="./img/search.png" alt="Search" />
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </section>
     </header>
     <main class="main">
