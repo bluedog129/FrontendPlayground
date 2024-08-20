@@ -256,7 +256,7 @@ function showMovieDetails(movieId) {
     fetchRelatedMovies(movieId),
     fetchMovieTrailer(movieId),
   ])
-    .then(([details, credits, relatedMovies, trailerData]) => {
+    .then(([details, credits, relatedMovies, trailerData]) => { 
       // 모달 데이터 표시 로직
     })
     .catch((err) => console.error(err));

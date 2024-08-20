@@ -71,6 +71,7 @@ function fetchMovieTrailer(movieId) {
 
 function showMovieDetails(movieId) {
   const $modal = document.getElementById("movieModal");
+  const $body = document.body;
 
   Promise.all([
     fetchMovieDetails(movieId),
@@ -174,22 +175,26 @@ function showMovieDetails(movieId) {
       }
 
       $modal.style.display = "block";
+      $body.classList.add("modal-open");
     })
     .catch((err) => console.error(err));
 }
 
 function initializeModal() {
   const $modal = document.getElementById("movieModal");
+  const $body = document.body;
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
       $modal.style.display = "none";
+      $body.classList.remove("modal-open");
     }
   });
 
   window.addEventListener("click", function (event) {
     if (event.target == $modal) {
       $modal.style.display = "none";
+      $body.classList.remove("modal-open");
     }
   });
 }

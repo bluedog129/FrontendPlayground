@@ -245,9 +245,36 @@
   margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 90%;
   max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body {
+  display: flex;
+  padding-top: 220px;
+  flex-grow: 1;
+}
+
+.modal-poster {
+  width: 30%;
+  max-width: 300px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.modal-info {
+  flex: 1;
+  overflow-y: auto;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 #close {
@@ -371,6 +398,8 @@
   border: 1px solid #888;
   width: 80%;
   max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
   border-radius: 10px;
 }
 
