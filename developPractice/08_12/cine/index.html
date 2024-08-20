@@ -29,7 +29,23 @@
           <h3>Related Movies</h3>
           <div class="related-movies"></div>
         </div>
-        <button class="trailer-button">Watch Trailer</button>
+        <div id="trailerContainer" style="display: none">
+          <iframe
+            id="trailerFrame"
+            width="100%"
+            height="450px"
+            src=""
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+          ></iframe>
+          <button id="closeTrailerBtn" style="display: none">
+            Close Trailer
+          </button>
+        </div>
+        <button id="watchTrailerBtn" class="trailer-button">
+          Watch Trailer
+        </button>
       </div>
     </div>
     <header class="header">

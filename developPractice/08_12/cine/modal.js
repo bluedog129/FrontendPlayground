@@ -68,6 +68,18 @@ function fetchMovieTrailer(movieId) {
     .catch((err) => console.error(err));
 }
 
+function closeTrailer() {
+  const $trailerFrame = document.getElementById("trailerFrame");
+  const $trailerContainer = document.getElementById("trailerContainer");
+  const $closeTrailerBtn = document.getElementById("closeTrailerBtn");
+  const $trailerButton = document.getElementById("watchTrailerBtn");
+
+  $trailerFrame.src = "";
+  $trailerContainer.style.display = "none";
+  $closeTrailerBtn.style.display = "none";
+  $trailerButton.style.display = "block";
+}
+
 function showMovieDetails(movieId) {
   const $modal = document.getElementById("movieModal");
   const $body = document.body;
@@ -156,7 +168,12 @@ function showMovieDetails(movieId) {
         )
         .join("");
 
-      const $trailerButton = document.querySelector(".trailer-button");
+      // 트레일러 관련 DOM참조 변수
+      const $trailerButton = document.getElementById("watchTrailerBtn");
+      const $trailerContainer = document.getElementById("trailerContainer");
+      const $trailerFrame = document.getElementById("trailerFrame");
+      const $closeTrailerBtn = document.getElementById("closeTrailerBtn");
+
       const trailer = trailerData.results.find(
         (video) => video.type === "Trailer" && video.site === "YouTube"
       );
@@ -164,10 +181,17 @@ function showMovieDetails(movieId) {
       if (trailer) {
         $trailerButton.style.display = "block";
         $trailerButton.onclick = () => {
-          window.open(
-            `https://www.youtube.com/watch?v=${trailer.key}`,
-            "_blank"
-          );
+          $trailerFrame.src = `https://www.youtube.com/embed/${trailer.key}`;
+          $trailerContainer.style.display = "block";
+          $closeTrailerBtn.style.display = "block";
+          $trailerButton.style.display = "none";
+        };
+
+        $closeTrailerBtn.onclick = () => {
+          $trailerFrame.src = "";
+          $trailerContainer.style.display = "none";
+          $closeTrailerBtn.style.display = "none";
+          $trailerButton.style.display = "block";
         };
       } else {
         $trailerButton.style.display = "none";
@@ -179,21 +203,27 @@ function showMovieDetails(movieId) {
     .catch((err) => console.error(err));
 }
 
-function initializeModal() {
+function closeModal() {
   const $modal = document.getElementById("movieModal");
   const $body = document.body;
 
+  $modal.style.display = "none";
+  $body.classList.remove("modal-open");
+  closeTrailer();
+}
+
+function initializeModal() {
+  const $modal = document.getElementById("movieModal");
+
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
-      $modal.style.display = "none";
-      $body.classList.remove("modal-open");
+      closeModal();
     }
   });
 
   window.addEventListener("click", function (event) {
     if (event.target == $modal) {
-      $modal.style.display = "none";
-      $body.classList.remove("modal-open");
+      closeModal();
     }
   });
 }
