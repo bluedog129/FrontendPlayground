@@ -104,7 +104,7 @@ function showMovieDetails(movieId) {
       if (details.backdrop_path) {
         $modalBackdrop.style.backgroundImage = `url(https://image.tmdb.org/t/p/w1280${details.backdrop_path})`;
       } else {
-        $modalBackdrop.style.backgroundImage = "none";
+        $modalBackdrop.style.backgroundImage = `url(https://image.tmdb.org/t/p/w1280${details.poster_path})`;
         $modalBackdrop.style.backgroundColor = "#f0f0f0";
       }
 

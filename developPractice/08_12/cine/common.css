@@ -1,7 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: "Merriweather", serif;
+  /* font-family: 'Crimson Text', serif; */
+  /* font-family: "Libre Baskerville", serif; */
+}
+
+img,
+.logo img {
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
 
 /* header */
@@ -129,6 +146,7 @@
   transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .event-item:hover {
@@ -353,6 +371,7 @@ body.modal-open {
 .related-movie {
   width: 30%;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .related-movie img {
