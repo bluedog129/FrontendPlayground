@@ -117,8 +117,8 @@ img,
 }
 
 .favorite-btn img {
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   transition: filter 0.3s ease;
 }
 
