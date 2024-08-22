@@ -71,6 +71,8 @@ function renderMovieList(movies) {
 
 function renderPagination(totalPages) {
   $pagination.innerHTML = "";
+  if (totalPages <= 1) return; // 페이지가 1개 이하면 페이지네이션을 표시하지 않습니다.
+
   const maxVisiblePages = 5;
   const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
   const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
@@ -107,8 +109,7 @@ function loadMovies(decade, page = 1) {
       if (response.results && Array.isArray(response.results)) {
         console.log("Fetched movies:", response.results);
         allMovies = response.results;
-        renderMovieList(allMovies);
-        renderPagination(response.total_pages);
+        updateMovieListAndPagination(allMovies);
       } else {
         console.error("Unexpected response format:", response);
       }
@@ -118,11 +119,20 @@ function loadMovies(decade, page = 1) {
     });
 }
 
+function updateMovieListAndPagination(movies) {
+  const startIndex = (currentPage - 1) * moviesPerPage;
+  const endIndex = startIndex + moviesPerPage;
+  const moviesToShow = movies.slice(startIndex, endIndex);
+  renderMovieList(moviesToShow);
+  renderPagination(Math.ceil(movies.length / moviesPerPage));
+}
+
 function filterInputMovies(searchTerm) {
   const filteredMovies = allMovies.filter((movie) =>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
   renderMovieList(filteredMovies);
+  renderPagination(Math.ceil(filteredMovies.length / moviesPerPage));
 }
 
 function resetToMain() {
@@ -147,7 +157,11 @@ $navLinks.forEach((link) => {
 
 $searchInput.addEventListener("input", (e) => {
   const searchTerm = e.target.value;
-  filterInputMovies(searchTerm);
+  currentPage = 1; // 검색 시 첫 페이지로 리셋
+  const filteredMovies = allMovies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  updateMovieListAndPagination(filteredMovies);
 });
 
 function init() {
