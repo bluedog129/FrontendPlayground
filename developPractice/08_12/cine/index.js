@@ -120,11 +120,21 @@ function loadMovies(decade, page = 1) {
 }
 
 function updateMovieListAndPagination(movies) {
-  const startIndex = (currentPage - 1) * moviesPerPage;
-  const endIndex = startIndex + moviesPerPage;
-  const moviesToShow = movies.slice(startIndex, endIndex);
-  renderMovieList(moviesToShow);
-  renderPagination(Math.ceil(movies.length / moviesPerPage));
+  const $noResultsMessage = document.querySelector(".no-results-message");
+
+  if (movies.length === 0) {
+    $eventList.innerHTML = "";
+    $noResultsMessage.style.display = "block";
+    $pagination.style.display = "none";
+  } else {
+    $noResultsMessage.style.display = "none";
+    $pagination.style.display = "block";
+    const startIndex = (currentPage - 1) * moviesPerPage;
+    const endIndex = startIndex + moviesPerPage;
+    const moviesToShow = movies.slice(startIndex, endIndex);
+    renderMovieList(moviesToShow);
+    renderPagination(Math.ceil(movies.length / moviesPerPage));
+  }
 }
 
 function filterInputMovies(searchTerm) {
