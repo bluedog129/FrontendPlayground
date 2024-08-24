@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>작삼예제</title>
+  </head>
+  <body>
+    <header>
+      <h1>작삼샘플</h1>
+      <nav>
+        <a href="/">작성하기</a>
+        <a href="/list">목록보기</a>
+      </nav>
+    </header>
+    <main>
+      <h2>작성하기</h2>
+      <form>
+        <label for="title">할 일 입력</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="할 일 입력"
+          required
+        />
+        <label for="">목표날짜</label>
+        <input type="date" name="dateOfGoals" id="dateOfGoals" />
+
+        <label for="hidden">작성일</label>
+        <input hidden type="date" name="dateOfCreate" id="dateOfCreate" />
+
+        <label for="todoDetail">상세내역</label>
+        <textarea name="todoDetail" id="todoDetail"></textarea>
+
+
+      </form>
+    </main>
+  </body>
+</html>
