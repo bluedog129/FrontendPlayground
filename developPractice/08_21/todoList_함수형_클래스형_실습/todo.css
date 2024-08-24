@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+li {
+  list-style: none;
+}
+#app {
+  max-width: 600px;
+  padding: 1rem;
+  margin: auto;
+}
+#todoInput {
+  border: 1px solid red;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+#todoInput input {
+  flex: 1;
+}
+#todoInput input,
+#todoInput button {
+  padding: 0.5rem;
+}
+
+#todoList {
+  border: 1px solid red;
+}
+.todoItem {
+  border: 1px solid lightblue;
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background-color: rgb(159, 238, 252);
+}
+.todoItem p {
+  flex: 1;
+}
+.todoItem > * {
+  padding: 0.5rem;
+}
+.todoItem.done {
+  background-color: transparent;
+  opacity: 0.5;
+}
+.todoItem.done p {
+  text-decoration: line-through;
+}

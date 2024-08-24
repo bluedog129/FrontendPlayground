@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문서 제목</title>
+    <link rel="stylesheet" href="./todo.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="todoInput">
+        <input
+          type="text"
+          id="newTodo"
+          placeholder="오늘의 할일을 추가하세요"
+        />
+        <button id="todoAdd">추가하기</button>
+      </div>
+      <ul id="todoList">
+        <li class="todoItem done">
+          <p>할일</p>
+          <button>완료</button>
+          <button>삭제</button>
+        </li>
+        <li class="todoItem">
+          <p>할일</p>
+          <button>완료</button>
+          <button>삭제</button>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const newTodoInput = document.getElementById("newTodo");
+      const todoAddBtn = document.getElementById("todoAdd");
+
+      let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+      const deleteTodo = (index) => {
+        todos.splice(index, 1);
+        saveAndRender();
+      };
+
+      const toggleDone = (index) => {
+        todos[index].done = !todos[index].done;
+        saveAndRender();
+      };
+
+      const saveAndRender = () => {
+        localStorage.setItem("todos", JSON.stringify(todos));
+        renderTodos();
+      };
+
+      const addTodo = () => {
+        const text = newTodoInput.value.trim();
+        if (text === "") {
+          // alert("할일을 입력해주세요");
+          newTodoInput.focus();
+          return;
+        } else {
+          // 할일을 추가 localStorage에 저장 {text : text, done : false}
+          todos = [{ text, done: false }, ...todos];
+          newTodoInput.value = "";
+          /// todoList 저장 후 렌더링
+          saveAndRender();
+        }
+      };
+
+      const renderTodos = () => {
+        const todoList = document.getElementById("todoList");
+        todoList.innerHTML = todos
+          .map(
+            (todo, index) => `
+        <li class="todoItem ${todo.done ? "done" : ""}">
+          <p>${todo.text}</p>
+          <button onclick="toggleDone(${index})">완료</button>
+          <button onclick="deleteTodo(${index})">삭제</button>
+				</li>
+        `
+          )
+          .join("");
+      };
+
+      todoAddBtn.addEventListener("click", addTodo);
+      newTodoInput.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+          addTodo();
+        }
+      });
+
+      renderTodos();
+    </script>
+  </body>
+</html>

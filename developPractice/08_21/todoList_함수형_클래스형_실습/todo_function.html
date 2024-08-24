@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>함수형 프로그래밍</title>
+    <link rel="stylesheet" href="./todo.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      function TodoInput(addTodo) {
+        this.addTodo = addTodo;
+
+        this.render = function () {
+          const div = document.createElement("div");
+          div.id = "todoInput";
+          div.innerHTML = `
+            <input type="text" id="newTodo" placeholder="오늘의 할일을 추가하세요" />
+            <button id="todoAdd">추가하기</button>
+          `;
+
+          const newTodoInput = div.querySelector("#newTodo");
+          const todoAddBtn = div.querySelector("#todoAdd");
+
+          todoAddBtn.onclick = () => {
+            const inputText = newTodoInput.value.trim();
+            if (inputText === "") {
+              newTodoInput.focus();
+              return;
+            } else {
+              this.addTodo(inputText);
+              newTodoInput.value = "";
+              newTodoInput.focus();
+            }
+          };
+
+          return div;
+        };
+      }
+
+      function TodoList(todos, deleteTodo, toggleDone) {
+        this.todos = todos;
+        this.deleteTodo = deleteTodo;
+        this.toggleDone = toggleDone;
+
+        this.render = function () {
+          const ul = document.createElement("ul");
+          ul.id = "todoList";
+          ul.innerHTML = this.todos
+            .map(
+              (todo, index) => `
+                <li class="todoItem ${
+                  todo.done ? "done" : ""
+                }" data-index="${index}">
+                  <p>${todo.text}</p>
+                  <button class="complete-btn">완료</button>
+                  <button class="delete-btn">삭제</button>
+                </li>
+                `
+            )
+            .join("");
+
+          // 이벤트 위임
+          ul.onclick = (e) => {
+            const li = e.target.closest("li");
+            if (!li) return;
+            const index = li.dataset.index;
+            if (e.target.classList.contains("delete-btn")) {
+              this.deleteTodo(index);
+            } else if (e.target.classList.contains("complete-btn")) {
+              this.toggleDone(index);
+            }
+          };
+
+          return ul;
+        };
+      }
+
+      function App() {
+        this.todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+        this.addTodo = (text) => {
+          this.todos = [{ text, done: false }, ...this.todos];
+          this.saveAndRender();
+        };
+
+        this.saveAndRender = () => {
+          localStorage.setItem("todos", JSON.stringify(this.todos));
+          this.render();
+        };
+
+        this.deleteTodo = (index) => {
+          this.todos.splice(index, 1);
+          this.saveAndRender();
+        };
+
+        this.toggleDone = (index) => {
+          this.todos[index].done = !this.todos[index].done;
+          this.saveAndRender();
+        };
+
+        this.render = () => {
+          const app = document.getElementById("app");
+          app.innerHTML = "";
+
+          const todoInput = new TodoInput(this.addTodo);
+          const todoList = new TodoList(
+            this.todos,
+            this.deleteTodo,
+            this.toggleDone
+          );
+          app.appendChild(todoInput.render());
+          app.appendChild(todoList.render());
+        };
+      }
+      const app = new App();
+      app.render();
+    </script>
+  </body>
+</html>
