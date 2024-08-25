@@ -10,7 +10,7 @@ exports.getList = async (req, res) => {
     const posts = await Post.getAllPosts();
     res.render("list", { posts });
   } catch (err) {
-    console.error(err);
+    console.error("Error fetching posts:", err);
     res.status(500).send("서버 오류가 발생했습니다.");
   }
 };
@@ -19,12 +19,16 @@ exports.addPost = async (req, res) => {
   const { title, dateOfGoals, dateOfCreate, todoDetail } = req.body;
 
   try {
+    console.log("Adding post:", {
+      title,
+      dateOfGoals,
+      dateOfCreate,
+      todoDetail,
+    });
     await Post.createPost({ title, dateOfGoals, dateOfCreate, todoDetail });
     res.redirect("/list");
   } catch (err) {
-    console.error(err);
+    console.error("Error adding post:", err);
     res.status(500).send("서버 오류가 발생했습니다.");
   }
 };
-
-// 기타 컨트롤러 함수들...

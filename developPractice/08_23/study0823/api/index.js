@@ -1,22 +1,24 @@
 const express = require("express");
 const app = express();
-const postRoutes = require("./routes/postRoutes");
 
-// 다른 미들웨어 설정...
+// 다른 미들웨어 및 라우트 설정...
 
-// 루트 경로 처리
-app.get("/", (req, res) => {
-  res.render("index"); // 또는 res.send("Hello World!"); 등
+// 마지막 미들웨어로 에러 핸들러 추가
+app.use((err, req, res, next) => {
+  console.error("Error details:", err);
+  res.status(500).json({
+    message: "Internal server error",
+    error: process.env.NODE_ENV === "production" ? {} : err,
+  });
 });
 
-// 다른 라우트
-app.use("/", postRoutes);
-
-// 404 처리
-app.use((req, res, next) => {
-  res.status(404).send("Sorry, page not found!");
-});
-
+// Vercel의 서버리스 함수 형태로 내보내기
 module.exports = (req, res) => {
-  app(req, res);
+  // 전역 에러 핸들링
+  try {
+    app(req, res);
+  } catch (error) {
+    console.error("Unhandled error:", error);
+    res.status(500).send("Critical server error");
+  }
 };

@@ -7,20 +7,34 @@ let db;
 
 async function connectDB() {
   if (!db) {
-    await client.connect();
-    db = client.db("todo");
+    try {
+      await client.connect();
+      db = client.db("todo");
+      console.log("Database connected successfully");
+    } catch (err) {
+      console.error("Database connection failed:", err);
+      throw new Error("Database connection failed");
+    }
   }
   return db;
 }
 
 exports.getAllPosts = async () => {
   const db = await connectDB();
-  return db.collection("posts").find().sort({ _id: -1 }).toArray();
+  try {
+    return await db.collection("posts").find().sort({ _id: -1 }).toArray();
+  } catch (err) {
+    console.error("Failed to fetch posts:", err);
+    throw err;
+  }
 };
 
 exports.createPost = async (post) => {
   const db = await connectDB();
-  return db.collection("posts").insertOne(post);
+  try {
+    return await db.collection("posts").insertOne(post);
+  } catch (err) {
+    console.error("Failed to create post:", err);
+    throw err;
+  }
 };
-
-// 기타 데이터베이스 작업 함수들...
