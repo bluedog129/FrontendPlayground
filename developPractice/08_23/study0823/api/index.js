@@ -27,3 +27,14 @@ module.exports = (req, res) => {
   console.log("Received request:", req.method, req.url);
   app(req, res);
 };
+// 다른 라우트 정의 후에 추가
+app.use((req, res, next) => {
+  console.log(`404 Not Found: ${req.method} ${req.url}`);
+  res.status(404).send("Sorry, page not found!");
+});
+
+// 에러 핸들링 미들웨어
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
