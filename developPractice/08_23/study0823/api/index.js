@@ -14,7 +14,3 @@ module.exports = app;
 
 // 라우터 설정
 app.use("/", postRoutes);
-
-app.listen(3000, () => {
-  console.log("서버 실행중...");
-});
