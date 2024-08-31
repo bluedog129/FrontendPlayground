@@ -1,0 +1,110 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  margin: 0;
+  padding: 20px;
+}
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  color: #4fc3f7;
+  font-size: 24px;
+  margin: 0;
+  margin-left: 10px;
+}
+
+.rocket-icon {
+  color: #4fc3f7;
+  font-size: 24px;
+}
+
+form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+input {
+  flex-grow: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #4fc3f7;
+  border-radius: 4px 0 0 4px;
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #4fc3f7;
+  color: #000;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.add-icon {
+  margin-left: 5px;
+}
+
+.total-count {
+  text-align: right;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #4fc3f7;
+}
+
+.travel-list {
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid #ff69b4;
+  border-radius: 4px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.travel-list-empty {
+  text-align: center;
+  color: #666;
+}
+
+.travel-list li {
+  background-color: #1e1e1e;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.travel-list li button {
+  background-color: transparent;
+  color: #ff69b4;
+  font-size: 14px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: #666;
+  margin-bottom: 10px;
+}
